@@ -9,8 +9,13 @@
 import MultiSlider
 import UIKit
 
+#if canImport(SwiftUI)
+import SwiftUI
+#endif
+
 class ViewController: UIViewController {
     @IBOutlet var multiSlider: MultiSlider!
+    @IBOutlet var showSwiftUIButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +50,25 @@ class ViewController: UIViewController {
         horizontalMultiSlider.keepsDistanceBetweenThumbs = false
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if #available(iOS 13.0, *) {
+            showSwiftUIButton.isHidden = false
+            showSwiftUIButton.layer.borderWidth = 1
+            showSwiftUIButton.layer.cornerRadius = showSwiftUIButton.frame.height / 2
+            showSwiftUIButton.layer.borderColor = view.actualTintColor.cgColor
+        }
+    }
+
     @objc func sliderChanged(_ slider: MultiSlider) {
         print("\(slider.value)")
+    }
+
+    @IBAction func showSwiftUIDemo() {
+        #if canImport(SwiftUI)
+        if #available(iOS 13.0, *) {
+            present(UIHostingController(rootView: MultiValueSliderDemo()), animated: true)
+        }
+        #endif
     }
 }

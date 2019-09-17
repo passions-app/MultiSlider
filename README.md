@@ -45,7 +45,6 @@ MultiValueSlider(value: $valueArray, minimumValue: 1, maximumValue: 5)
 
 All properties mentioned below can be passed as arguments to the `MultiValueSlider` initializer.
 
-
 ### Getting multiple thumb values
 
 ```swift
