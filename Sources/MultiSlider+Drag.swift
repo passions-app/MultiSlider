@@ -62,10 +62,10 @@ extension MultiSlider: UIGestureRecognizerDelegate {
         switch (distanceBetweenThumbs, snapStepSize) {
         case (0, _):
             delta = 0
-        case let (_, snapStepSize) where snapStepSize > 0:
-            delta = stepSizeInView
         case let (distance, _) where distance > 0 && distance < maximumValue - minimumValue:
             delta = (distance / (maximumValue - minimumValue)) * slideView.bounds.size(in: orientation)
+        case let (_, snapStepSize) where snapStepSize > 0:
+            delta = stepSizeInView
         default:
             delta = thumbViews[draggedThumbIndex].frame.size(in: orientation) / 2
         }
